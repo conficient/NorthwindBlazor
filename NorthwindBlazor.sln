@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindBlazor.Client", "N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindBlazor.Shared", "NorthwindBlazor.Shared\NorthwindBlazor.Shared.csproj", "{B03B09A6-7F80-4917-A0FF-844DFD516A95}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindBlazor.Database", "NorthwindBlazor.Database\NorthwindBlazor.Database.csproj", "{C88894CA-B436-4C22-8245-F0E7514D6ACF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindBlazor.Entities", "NorthwindBlazor.Entities\NorthwindBlazor.Entities.csproj", "{653B6934-B5C6-4DA2-A531-1CEBF1B729D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{B03B09A6-7F80-4917-A0FF-844DFD516A95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B03B09A6-7F80-4917-A0FF-844DFD516A95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B03B09A6-7F80-4917-A0FF-844DFD516A95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C88894CA-B436-4C22-8245-F0E7514D6ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C88894CA-B436-4C22-8245-F0E7514D6ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C88894CA-B436-4C22-8245-F0E7514D6ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C88894CA-B436-4C22-8245-F0E7514D6ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{653B6934-B5C6-4DA2-A531-1CEBF1B729D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653B6934-B5C6-4DA2-A531-1CEBF1B729D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653B6934-B5C6-4DA2-A531-1CEBF1B729D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653B6934-B5C6-4DA2-A531-1CEBF1B729D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
