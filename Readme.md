@@ -27,6 +27,15 @@ We want to test the following:
  * Navigation
  * Search
 
+ ### Requirements
+
+ A quick list of the stuff we're using as a reference:
+ * [Visual Studio 2017 (version 15.8)](https://visualstudio.microsoft.com/)
+ * [Blazor 0.5.1](https://github.com/aspnet/Blazor/releases/tag/0.5.1)
+ * [.Net Core 2.1 (version 2.1.400) SDK](https://www.microsoft.com/net/download)
+ 
+
+
  ### SQL Setup
 
 I'm going to use the [Northwind](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/downloading-sample-databases)
@@ -75,16 +84,57 @@ A quick search on Github reveals [someone already did this](https://github.com/J
 with thanks to [Jason](https://github.com/JasonGT) at SSW, I've copied the entity and database 
 code sections we need.
 
-I might want to put Blazor components in the same library as the entities, do I create `NorthwindBlazor.Entities` using 
+#### Entities
+
+I might want to put Blazor components in the same library as the entities, so I create 
+the library **NorthwindBlazor.Entities** using 
 `dotnet new blazorlib -o NorthwindBlazor.Entities` at the command line, and add the 
-project into the solution. Still waiting on [Item Templates](https://github.com/aspnet/Blazor/issues/23)
-on the **Add** dialog here.
+project into the solution (still waiting on [Project and Item Templates](https://github.com/aspnet/Blazor/issues/23)!).
 
-The `NorthwindDbContext` class needs to exist in a separate DLL, which I've created as 
-.NET Core 2.1 library. I could have used a .NET Standard 2.0 project, but since this will only 
-ever be used in the server, and we don't want it on the client, that's okay.
+This contains some example code which I delete since we don't need it, and copy the Entity 
+classes from Jason's GitHub repo.
 
-### Test
+#### DbContext
+
+We cannot put the `DbContext` class in the same DLL as the libraries as it causes a 
+conflict with Mono-webassembly. So the context goes in **NorthwindBlazor.Database** 
+which I've created as _.NET Core 2.1_ library. I could have used a .NET Standard 2.0 
+library, but since this will only ever be used in the server, and we don't want it 
+on the client, that's okay.
+
+### Test the Database
+
+I created a test class **NorthwindBlazor.Database.Tests** (using MSTestv2 and .NET Core) 
+to check that the database connectivity is working correctly. Initially I used the code
+```
+   var customers = await db.Customers.ToListAsync();
+```
+However, the code only used the `CustomerId` and `CompanyName` properties, so requesting
+the full object when you don't need it is bad practice. I changed this to
+```
+    var customers = await (from c in db.Customers 
+                           select new { c.CustomerId, c.CompanyName}).ToListAsync();
+```
+
+This is better (and faster).
+
+However, it occurs to me that this view of the table is one I'm going to want in 
+the application. If I wrote the WebAPI this way, it would return an anonymous type. 
+When I want to consume this in Blazor, I'm going to need to create a type for it anyway
+so I can deserialize the JSON into .NET objects. So I added a folder `CustomerModels` 
+in the Entities class and a class `CompanyNameOnly.cs`, then changed the test to
+```
+var customers = await (from c in db.Customers
+                        orderby c.CompanyName
+                        select new Entities.CustomerModels.CompanyNameOnly()
+                        {
+                           CustomerId = c.CustomerId,
+                           CompanyName = c.CompanyName
+                        }).ToListAsync();
+```
+That's a better approach.
+
+
 
 
 
