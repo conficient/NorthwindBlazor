@@ -124,25 +124,29 @@ When I want to consume this in Blazor, I'm going to need to create a type for it
 so I can deserialize the JSON into .NET objects. So I added a folder `CustomerModels` 
 in the Entities class and a class `CompanyNameOnly.cs`, then changed the test to
 ```
-var customers = await (from c in db.Customers
-                        orderby c.CompanyName
-                        select new Entities.CustomerModels.CompanyNameOnly()
-                        {
-                           CustomerId = c.CustomerId,
-                           CompanyName = c.CompanyName
-                        }).ToListAsync();
+var customers = await 
+        (from c in db.Customers
+         orderby c.CompanyName
+         select new Entities.CustomerModels.CompanyNameOnly(c.CustomerId, c.CompanyName)
+         ).ToListAsync();
 ```
 That's a better approach.
 
+## Connecting up the Database in the Server
 
+So next step is wire up the database in the server, add an API method and then access this method from Blazor.
 
+### Server
 
+We rename the `SampleDataController.cs` that gets created by default to `CustomerController.cs`, and
+change the method to `CompanyNames`. This returns the same list of `CompanyNameOnly` objects as the test.
 
+I added a `Common.cs` class to create the context in, as it will be required in several controllers.  
+I have referenced the various database libraries to make this happen.
 
+### Blazor App
 
-
-
-
-
+First I added **NorthwindBlazor.Entities** to the references of the app. Then I renamed `FetchData.cshtml` 
+to `Customers.cshtml`, and amended the code to make the new API call
 
 

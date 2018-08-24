@@ -1,0 +1,41 @@
+﻿@using NorthwindBlazor.Entities.CustomerModels
+@page "/customers"
+@inject HttpClient Http
+
+<h1>Customers</h1>
+
+<p>All customers on the server.</p>
+
+@if (customers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Company Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in customers)
+            {
+                <tr>
+                    <td>@customer.CustomerId</td>
+                    <td>@customer.CompanyName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+CompanyNameOnly[] customers;
+
+protected override async Task OnInitAsync()
+{
+    customers = await Http.GetJsonAsync<CompanyNameOnly[]>("api/Customer/CompanyNames");
+}
+}

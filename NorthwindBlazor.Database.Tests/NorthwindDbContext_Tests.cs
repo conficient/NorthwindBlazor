@@ -14,7 +14,7 @@ namespace NorthwindBlazor.Database.Tests
         /// <summary>
         /// setup log to console if required
         /// </summary>
-        public static readonly LoggerFactory ConsoleLogFactory= new LoggerFactory(new[] 
+        public static readonly LoggerFactory ConsoleLogFactory = new LoggerFactory(new[]
         {
             new ConsoleLoggerProvider((_, __) => true, true)
         });
@@ -33,15 +33,13 @@ namespace NorthwindBlazor.Database.Tests
         {
             using (var db = GetContext())
             {
-                var customers = await (from c in db.Customers
-                                       orderby c.CompanyName
-                                       select new Entities.CustomerModels.CompanyNameOnly()
-                                       {
-                                           CustomerId = c.CustomerId,
-                                           CompanyName = c.CompanyName
-                                       }).ToListAsync();
+                var customers = await 
+                    (from c in db.Customers
+                     orderby c.CompanyName
+                     select new Entities.CustomerModels.CompanyNameOnly(c.CustomerId, c.CompanyName)
+                     ).ToListAsync();
 
-                foreach(var customer in customers)
+                foreach (var customer in customers)
                 {
                     Console.WriteLine($"{customer.CustomerId}: {customer.CompanyName}");
                 }

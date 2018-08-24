@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NorthwindBlazor.Client\NorthwindBlazor.Client.csproj" />
+    <ProjectReference Include="..\NorthwindBlazor.Database\NorthwindBlazor.Database.csproj" />
+    <ProjectReference Include="..\NorthwindBlazor.Entities\NorthwindBlazor.Entities.csproj" />
     <ProjectReference Include="..\NorthwindBlazor.Shared\NorthwindBlazor.Shared.csproj" />
   </ItemGroup>
 

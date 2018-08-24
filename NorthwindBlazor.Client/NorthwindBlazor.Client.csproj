@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NorthwindBlazor.Entities\NorthwindBlazor.Entities.csproj" />
     <ProjectReference Include="..\NorthwindBlazor.Shared\NorthwindBlazor.Shared.csproj" />
   </ItemGroup>
 
