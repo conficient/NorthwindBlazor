@@ -2,13 +2,17 @@
 @page "/customers"
 @inject HttpClient Http
 
-<h1>Customers</h1>
+<h1>Customer List</h1>
 
-<p>All customers on the server.</p>
-
-@if (customers == null)
+@if(state==States.loading)
 {
     <p><em>Loading...</em></p>
+}
+else if (state == States.error)
+{
+<div class="alert alert-danger">
+    [icon] @error
+</div>
 }
 else
 {
@@ -32,10 +36,24 @@ else
 }
 
 @functions {
-CompanyNameOnly[] customers;
+    enum States {  loading, error, loaded }
+    // inital state
+    States state = States.loading;
+    string error = null;
+    CompanyNameOnly[] customers;
 
-protected override async Task OnInitAsync()
-{
-    customers = await Http.GetJsonAsync<CompanyNameOnly[]>("api/Customer/CompanyNames");
-}
+    protected override async Task OnInitAsync()
+    {
+        try
+        {
+            customers = await Http.GetJsonAsync<CompanyNameOnly[]>("api/Customer/CompanyNames");
+            state = States.loaded;
+
+        }
+        catch (Exception e)
+        {
+            error = e.Message;
+            state = States.error;
+        }
+    }
 }
