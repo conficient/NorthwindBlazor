@@ -1,0 +1,26 @@
+﻿@page "/categories"
+@using NorthwindBlazor.Entities.Views;
+@inject HttpClient Http;
+
+<h2>Categories</h2>
+
+<ObjectLoader LoadAsync="Load">
+    <div class="row">
+        @foreach (var category in categories)
+        {
+            <div class="col">
+                <img src='/Category/Image/@category.Id' />
+                @category.Name
+            </div>
+        }
+    </div>
+</ObjectLoader>
+@functions
+{
+IdName[] categories;
+
+protected async Task Load()
+{
+    categories = await Http.GetJsonAsync<IdName[]>("/Category/Index");
+}
+}

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NorthwindBlazor.Entities.CustomerModels;
+using NorthwindBlazor.Entities.Views;
 using Microsoft.EntityFrameworkCore;
 
 namespace NorthwindBlazor.Server.Controllers
@@ -17,13 +17,13 @@ namespace NorthwindBlazor.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("[action]")]
-        public async Task<IEnumerable<CompanyNameOnly>> CompanyNames()
+        public async Task<IEnumerable<IdName>> CompanyNames()
         {
             using(var db = Common.GetDb())
             {
                 return await 
                     (from c in db.Customers
-                     select new CompanyNameOnly(c.CustomerId, c.CompanyName)
+                     select new IdName(c.CustomerId, c.CompanyName)
                      ).ToListAsync();
             }
         }

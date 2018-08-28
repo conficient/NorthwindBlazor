@@ -1,4 +1,4 @@
-﻿@using NorthwindBlazor.Entities.CustomerModels
+﻿@using NorthwindBlazor.Entities.Views
 @page "/customers"
 @inject HttpClient Http
 
@@ -27,8 +27,8 @@ else
             @foreach (var customer in customers)
             {
                 <tr>
-                    <td>@customer.CustomerId</td>
-                    <td>@customer.CompanyName</td>
+                    <td>@customer.Id</td>
+                    <td>@customer.Name</td>
                 </tr>
             }
         </tbody>
@@ -40,13 +40,13 @@ else
     // inital state
     States state = States.loading;
     string error = null;
-    CompanyNameOnly[] customers;
+    IdName[] customers;
 
     protected override async Task OnInitAsync()
     {
         try
         {
-            customers = await Http.GetJsonAsync<CompanyNameOnly[]>("api/Customer/CompanyNames");
+            customers = await Http.GetJsonAsync<IdName[]>("api/Customer/CompanyNames");
             state = States.loaded;
 
         }

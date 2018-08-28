@@ -20,7 +20,7 @@ namespace NorthwindBlazor.Server
         public static NorthwindDbContext GetDb()
         {
             // TODO: move to configuration?
-            const string connectionString = "Server=[server];Database=Northwind;Uid=Blazor;Pwd=Blazor;";
+            const string connectionString = "Server=SVR3;Database=Northwind;Uid=Blazor;Pwd=Blazor;";
             var builder = new DbContextOptionsBuilder<NorthwindDbContext>();
             builder.UseSqlServer(connectionString);
             return new NorthwindDbContext(builder.Options);

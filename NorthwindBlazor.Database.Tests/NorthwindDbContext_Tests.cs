@@ -36,12 +36,12 @@ namespace NorthwindBlazor.Database.Tests
                 var customers = await 
                     (from c in db.Customers
                      orderby c.CompanyName
-                     select new Entities.CustomerModels.CompanyNameOnly(c.CustomerId, c.CompanyName)
+                     select new Entities.Views.IdName(c.CustomerId, c.CompanyName)
                      ).ToListAsync();
 
                 foreach (var customer in customers)
                 {
-                    Console.WriteLine($"{customer.CustomerId}: {customer.CompanyName}");
+                    Console.WriteLine($"{customer.Id}: {customer.Name}");
                 }
             }
         }

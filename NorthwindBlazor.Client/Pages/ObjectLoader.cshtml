@@ -1,0 +1,42 @@
+﻿@if (state == States.Loading)
+{
+    <p><em>Loading</em></p>
+}
+else if (state == States.Error)
+{
+    <div class="alert alert-danger">@error</div>
+} else
+{
+    @ChildContent
+}
+
+@functions {
+
+enum States { Loading, Loaded, Error }
+States state = States.Loading;
+string error;
+
+[ParameterAttribute]
+protected Func<Task> LoadAsync { get; set; }
+
+/// <summary>
+/// Content to display
+/// </summary>
+[ParameterAttribute]
+protected RenderFragment ChildContent { get; set; }
+
+protected override async Task OnInitAsync()
+{
+    try
+    {
+        await LoadAsync();
+        state = States.Loaded;
+
+    }
+    catch (Exception e)
+    {
+        error = e.Message;
+        state = States.Error;
+    }
+}
+}
