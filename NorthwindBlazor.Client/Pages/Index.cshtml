@@ -1,7 +1,47 @@
 ﻿@page "/"
+@using NorthwindBlazor.Entities
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<div class="card">
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Form Test</strong>
+    </h5>
+    <div class="card-body">
+        <BSForm>
+            <BSFieldset Legend="This legend 1">
+                <BSControl Name="ContactName" Label="Contact name">
+                    <input type="text" class="form-control" name="ContactName" bind="@customer.ContactName" />
+                </BSControl>
+                <BSText Label="Company name" Value="@customer.CompanyName" HelpText="Enter company name" Name="CompanyName" />
+            </BSFieldset>
+        </BSForm>
+        <button type="button" onclick="@CheckValues">Check</button>
+    </div>
+</div>
+<div>
+    @message
+</div>
+<div>
+    company: @customer.CompanyName
+</div>
+<div>
+    contact: @customer.ContactName
+</div>
+
+
+
+@functions {
+string message;
+
+Customer customer = new Customer() { ContactName ="contact", CompanyName ="company" };
+
+void CheckValues()
+{
+    message = $"Contact={customer.ContactName}, company={customer.CompanyName}";
+}
+}

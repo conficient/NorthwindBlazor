@@ -1,0 +1,14 @@
+﻿<BSControl Label="@Label" Name="@Name" HelpText="@HelpText">
+    <input class="form-control" type="text" name="@Name" bind="@Value" onchange="@logChange" />
+</BSControl>
+@functions {
+    [Parameter] protected string Value { get; set; }
+    [Parameter] protected string Name { get; set; }
+    [Parameter] protected string Label { get; set; }
+    [Parameter] protected string HelpText { get; set; }
+
+    void logChange()
+    {
+        Console.WriteLine("Value=" + Value);
+    }
+}

@@ -16,4 +16,19 @@
     <ProjectReference Include="..\NorthwindBlazor.Shared\NorthwindBlazor.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Forms\BSText.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Forms\BSFieldset.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Forms\BSControl.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Forms\BSForm.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

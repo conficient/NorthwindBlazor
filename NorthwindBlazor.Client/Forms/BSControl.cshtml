@@ -1,0 +1,16 @@
+﻿<div class="form-group">
+    <label for="@Name">@Label</label>
+    @ChildContent
+    @if (HasHelpText)
+    {
+        <small class="form-text text-muted">@HelpText</small>
+    }
+</div>
+
+@functions {
+[Parameter] protected RenderFragment ChildContent { get; set; }
+[Parameter] protected string Name { get; set; }
+[Parameter] protected string Label { get; set; }
+[Parameter] protected string HelpText { get; set; }
+bool HasHelpText => !string.IsNullOrWhiteSpace(HelpText);
+}

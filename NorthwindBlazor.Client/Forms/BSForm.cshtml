@@ -1,0 +1,7 @@
+﻿<form class="@CSS">
+  @ChildContent
+</form>
+@functions {
+    [Parameter] protected RenderFragment ChildContent { get; set; }
+    [Parameter] protected string CSS { get; set; }
+}

@@ -1,0 +1,12 @@
+﻿<fieldset>
+    @if (HasLegend)
+    {
+        <legend>@Legend</legend>
+    }
+    @ChildContent
+</fieldset>
+@functions {
+[Parameter] protected RenderFragment ChildContent { get; set; }
+[Parameter] protected string Legend { get; set; }
+bool HasLegend => !string.IsNullOrWhiteSpace(Legend);
+}
