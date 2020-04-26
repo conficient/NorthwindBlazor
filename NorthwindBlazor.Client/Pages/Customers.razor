@@ -31,11 +31,11 @@ else
     </table>
 }
 
-@functions {
-CompanyNameOnly[] customers;
+@code {
+    CompanyNameOnly[] customers;
 
-protected override async Task OnInitAsync()
-{
-    customers = await Http.GetJsonAsync<CompanyNameOnly[]>("api/Customer/CompanyNames");
-}
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await Http.GetFromJsonAsync<CompanyNameOnly[]>("api/Customer/CompanyNames");
+    }
 }
