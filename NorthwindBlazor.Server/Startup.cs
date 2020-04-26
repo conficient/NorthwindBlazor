@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using NorthwindBlazor.Server.Services;
+using Microsoft.AspNet.OData.Extensions;
+using NorthwindBlazor.Database;
+using Microsoft.OData.Edm;
+using Microsoft.AspNet.OData.Builder;
 
 namespace NorthwindBlazor.Server
 {
@@ -29,6 +33,9 @@ namespace NorthwindBlazor.Server
 
             // Add Northwind DB service
             services.AddSingleton<INorthwindDbService, NorthwindDbService>();
+
+            // Add OData service
+            services.AddOData();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,8 +63,19 @@ namespace NorthwindBlazor.Server
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapODataRoute("odata", "odata", GetEdmModel());
                 endpoints.MapFallbackToFile("index.html");
             });
+        }
+
+        IEdmModel GetEdmModel()
+        {
+            var odataBuilder = new ODataConventionModelBuilder();
+            odataBuilder.EntitySet<Entities.Category>("Category");
+            return odataBuilder.GetEdmModel();
+
+            // see https://gist.github.com/dariusclay/8673940
+            /* generate EDM modele from EF */
         }
     }
 }
