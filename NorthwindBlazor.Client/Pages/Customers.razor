@@ -6,36 +6,48 @@
 
 <p>All customers on the server.</p>
 
-@if (customers == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Company Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var customer in customers)
-            {
+<GreyOutZone IsGreyedOut="isLoading">
+    @if (customers == null)
+    {
+        <div class="p-3">
+            <h4 class="text-warning">Loading...</h4>
+            <div class="alert alert-info">
+                Note that on first run the Northwind database
+                will be created and seeded so it will take a few seconds!
+            </div>
+        </div>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@customer.CustomerId</td>
-                    <td>@customer.CompanyName</td>
+                    <th>Id</th>
+                    <th>Company Name</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                @foreach (var customer in customers)
+                {
+                    <tr>
+                        <td>@customer.CustomerId</td>
+                        <td>@customer.CompanyName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</GreyOutZone>
 
 @code {
+
+    bool isLoading = true;
+
     CompanyNameOnly[] customers;
 
     protected override async Task OnInitializedAsync()
     {
         customers = await Http.GetFromJsonAsync<CompanyNameOnly[]>("api/Customer/CompanyNames");
+        isLoading = false;
     }
 }
