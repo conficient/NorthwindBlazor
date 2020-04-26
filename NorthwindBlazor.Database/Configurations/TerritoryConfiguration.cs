@@ -9,7 +9,7 @@ namespace NorthwindBlazor.Database.Configurations
         public void Configure(EntityTypeBuilder<Territory> builder)
         {
             builder.HasKey(e => e.TerritoryId)
-                .ForSqlServerIsClustered(false);
+                .IsClustered(false);
 
             builder.Property(e => e.TerritoryId)
                 .HasColumnName("TerritoryID")

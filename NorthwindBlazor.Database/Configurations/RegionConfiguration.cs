@@ -9,7 +9,7 @@ namespace NorthwindBlazor.Database.Configurations
         public void Configure(EntityTypeBuilder<Region> builder)
         {
             builder.HasKey(e => e.RegionId)
-                .ForSqlServerIsClustered(false);
+                .IsClustered(false);
 
             builder.Property(e => e.RegionId)
                 .HasColumnName("RegionID")
