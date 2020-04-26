@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30021.99
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindBlazor.Server", "NorthwindBlazor.Server\NorthwindBlazor.Server.csproj", "{A10FDA38-2B13-4E1A-905C-604A182A7B7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindBlazor.Server", "NorthwindBlazor.Server\NorthwindBlazor.Server.csproj", "{A10FDA38-2B13-4E1A-905C-604A182A7B7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindBlazor.Client", "NorthwindBlazor.Client\NorthwindBlazor.Client.csproj", "{A263E6DF-A917-4090-9E6D-27C0F84B38B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindBlazor.Client", "NorthwindBlazor.Client\NorthwindBlazor.Client.csproj", "{A263E6DF-A917-4090-9E6D-27C0F84B38B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindBlazor.Shared", "NorthwindBlazor.Shared\NorthwindBlazor.Shared.csproj", "{B03B09A6-7F80-4917-A0FF-844DFD516A95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindBlazor.Shared", "NorthwindBlazor.Shared\NorthwindBlazor.Shared.csproj", "{B03B09A6-7F80-4917-A0FF-844DFD516A95}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindBlazor.Database", "NorthwindBlazor.Database\NorthwindBlazor.Database.csproj", "{C88894CA-B436-4C22-8245-F0E7514D6ACF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindBlazor.Entities", "NorthwindBlazor.Entities\NorthwindBlazor.Entities.csproj", "{653B6934-B5C6-4DA2-A531-1CEBF1B729D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindBlazor.Database.Tests", "NorthwindBlazor.Database.Tests\NorthwindBlazor.Database.Tests.csproj", "{7E4CF46C-A312-481A-A6FB-E7E9BC98A14D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NorthwindBlazor.Database.Tests", "NorthwindBlazor.Database.Tests\NorthwindBlazor.Database.Tests.csproj", "{7E4CF46C-A312-481A-A6FB-E7E9BC98A14D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{458FD239-4D3F-41BE-A70F-603DA2362AE8}"
 	ProjectSection(SolutionItems) = preProject

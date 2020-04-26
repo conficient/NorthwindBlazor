@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,21 +12,18 @@ namespace NorthwindBlazor.Database.Tests
     [TestClass]
     public class NorthwindDbContext_Tests
     {
-        /// <summary>
-        /// setup log to console if required
-        /// </summary>
-        public static readonly LoggerFactory ConsoleLogFactory = new LoggerFactory(new[]
-        {
-            new ConsoleLoggerProvider((_, __) => true, true)
-        });
-
         private NorthwindDbContext GetContext()
         {
-            const string connectionString = "Server=[server];Database=Northwind;Uid=Blazor;Pwd=Blazor;";
-            var builder = new DbContextOptionsBuilder<NorthwindDbContext>();
-            builder.UseSqlServer(connectionString);
-            //builder.UseLoggerFactory(ConsoleLogFactory); // enable to see EF log in console
-            return new NorthwindDbContext(builder.Options);
+            var config = Initialization.Configuration;
+            string connectionString = config.GetConnectionString("northwind");
+            var options = new DbContextOptionsBuilder<NorthwindDbContext>()
+                .UseSqlServer(connectionString)
+                .Options;
+            // create context
+            var result = new NorthwindDbContext(options);
+            // check DB exists, and if not, initialize it
+            NorthwindBlazor.Database.NorthwindInitializer.Initialize(result);
+            return result;
         }
 
         [TestMethod]
@@ -33,7 +31,7 @@ namespace NorthwindBlazor.Database.Tests
         {
             using (var db = GetContext())
             {
-                var customers = await 
+                var customers = await
                     (from c in db.Customers
                      orderby c.CompanyName
                      select new Entities.CustomerModels.CompanyNameOnly(c.CustomerId, c.CompanyName)

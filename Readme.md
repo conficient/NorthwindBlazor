@@ -47,12 +47,13 @@ database for this experiment. There are more complex demo databases such as
 AdventureWorks but these are more about SQL feature demonstration that a useful basic
 database such as Northwind, which only has 13 tables.
 
-For development I've restored Northwind onto a SQL 2014 Developer Edition server using 
-the restore SQL script from the site above. I've set up a single user called _Blazor_,
-(password also _Blazor_) and given it full access to all the tables in the database. 
+For this GitHub version I've set up the code to use a SQL Express local database that will
+be created an populated on first use. This is so anyone using this example doesn't have to set
+up a SQL Server and restore. The `Database` prokect includes a class `NorthwindInitializer`
+which will create and populate the SQL Express DB for you.
 
-That's okay for a test like this, don't do this on a real application. You should probably 
-use user secrets in the app configuration to hide the login.
+If you've got a SQL Server handy and would prefer it to use that you can change the connection
+string in `appsettings.json` to use this instead.
 
 ## Blazor Application
 
