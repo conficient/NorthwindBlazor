@@ -1,15 +1,39 @@
-﻿<div class="form-group row">
+﻿
+<div class="form-group row">
     <label for="categoryId" class="col-sm-2 col-form-label">ID</label>
     <div class="col-sm-10">
-        <input type="text" disabled class="form-control" id="catId" >
+        <span type="text" disabled class="form-control" id="catId"></span>
     </div>
 </div>
+
 <div class="form-group row">
     <label for="catName" class="col-sm-2 col-form-label">Name</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="catName">
+        <InputText @bind-Value="Model.CategoryName" id="catName" class="form-control" />
     </div>
 </div>
+
+<div class="form-group row">
+    <label for="catDesc" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-10">
+        <InputTextArea @bind-Value="Model.Description" id="catDesc" class="form-control" />
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="catPic" class="col-sm-2 col-form-label">Picture</label>
+    <div class="col-sm-10">
+        @if (Model.HasPicture)
+        {
+            <img src="@Category.PictureUrl(Model.CategoryId)" alt="@Model.CategoryName" />
+        }
+        else
+        {
+            <i>No picture</i>
+        }
+    </div>
+</div>
+
 @code
 {
     [Parameter] public Category Model { get; set; }
