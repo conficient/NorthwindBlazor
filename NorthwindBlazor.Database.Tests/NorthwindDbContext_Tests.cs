@@ -29,18 +29,16 @@ namespace NorthwindBlazor.Database.Tests
         [TestMethod]
         public async Task CheckConnectivity()
         {
-            using (var db = GetContext())
-            {
-                var customers = await
-                    (from c in db.Customers
-                     orderby c.CompanyName
-                     select new Entities.CustomerModels.CompanyNameOnly(c.CustomerId, c.CompanyName)
-                     ).ToListAsync();
+            using var db = GetContext();
+            var customers = await
+                (from c in db.Customers
+                 orderby c.CompanyName
+                 select new Entities.CustomerModels.CompanyNameOnly(c.CustomerId, c.CompanyName)
+                 ).ToListAsync();
 
-                foreach (var customer in customers)
-                {
-                    Console.WriteLine($"{customer.CustomerId}: {customer.CompanyName}");
-                }
+            foreach (var customer in customers)
+            {
+                Console.WriteLine($"{customer.CustomerId}: {customer.CompanyName}");
             }
         }
     }
